@@ -16,9 +16,10 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     get users_path
     assert_response :success
   end
-  
-  test "should show category" do
-    get category_url(@category)
+
+  test "should show user" do
+    @user.save
+    get user_url(@user)
     assert_response :success
   end
 
