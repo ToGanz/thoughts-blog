@@ -15,18 +15,17 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
     assert_match "test1", response.body
   end
 
-  # test "invalid signup information" do
-  #   get signup_path
-  #   assert_response :success
-  #   assert_no_difference 'User.count' do
-  #     post users_path, params: { user: { name:  "",
-  #                                        email: "user@invalid",
-  #                                        password:              "foo",
-  #                                        password_confirmation: "bar" } }
-  #   end
-  #   assert_template 'users/new'
-  #   assert_match 'errors', response.body
-  #   assert_select 'div.alert'
-  # end
+  test "invalid signup information" do
+    get signup_path
+    assert_response :success
+    assert_no_difference 'User.count' do
+      post users_path, params: { user: { name:  "",
+                                         email: "user@invalid",
+                                         password:              "foo",
+                                         password_confirmation: "bar" } }
+    end
+    assert_match 'errors', response.body
+    assert_select 'div.alert'
+  end
 
 end
