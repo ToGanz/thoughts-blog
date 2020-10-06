@@ -6,7 +6,7 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
     get signup_path
     assert_response :success
     assert_difference 'User.count', 1 do
-      post users_path, params: { user: { username: "test1", email: "test1@test.com",
+      post users_path, params: { user: { name: "test1", email: "test1@test.com",
                                  password: "password", password_confirmation: "password"} }
       assert_response :redirect
     end
@@ -27,7 +27,6 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
   #   assert_template 'users/new'
   #   assert_match 'errors', response.body
   #   assert_select 'div.alert'
-  #   assert_select 'h4.alert-heading'
   # end
 
 end
