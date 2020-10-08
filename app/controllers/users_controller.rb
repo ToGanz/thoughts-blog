@@ -15,7 +15,8 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      session[:user_id] = @user.id
+      reset_session
+      log_in(@user)
       flash[:notice] = "Welcome to the Thoughts blog #{@user.name}. You have succesfully created a user."
       redirect_to @user
     else
