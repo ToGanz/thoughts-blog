@@ -12,7 +12,9 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
     end
     follow_redirect!
     assert_response :success
+    assert_template 'users/show'
     assert_match "test1", response.body
+    assert !session[:user_id].nil?
   end
 
   test "invalid signup information" do
