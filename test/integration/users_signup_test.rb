@@ -2,6 +2,7 @@ require 'test_helper'
 
 class UsersSignupTest < ActionDispatch::IntegrationTest
   
+
   test "creating a valid user" do
     get signup_path
     assert_response :success
