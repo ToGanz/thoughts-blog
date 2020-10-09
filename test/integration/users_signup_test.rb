@@ -14,7 +14,7 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_template 'users/show'
     assert_match "test1", response.body
-    assert !session[:user_id].nil?
+    assert is_logged_in?
   end
 
   test "invalid signup information" do
