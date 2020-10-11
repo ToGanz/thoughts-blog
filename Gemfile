@@ -59,3 +59,4 @@ group :production do
 end
 
 gem 'rails-controller-testing'
+gem 'will_paginate'
