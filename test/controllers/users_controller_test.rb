@@ -12,9 +12,9 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
                       password: "password", password_confirmation: "password")
   end
 
-  test "should get index" do
+  test "should redirect index when not logged in" do
     get users_path
-    assert_response :success
+    assert_redirected_to login_url
   end
 
   test "should show user" do
