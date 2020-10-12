@@ -5,7 +5,8 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   def setup
     @user = User.create(name: "User1",
                      email: "user1@test.com",
-                     password: "password", password_confirmation: "password")
+                     password: "password", password_confirmation: "password",
+                     admin: true)
 
     @user2 = User.create(name: "User2",
                       email: "user2@test.com",
@@ -52,6 +53,16 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     patch user_path(@user), params: { user: { name: @user.name,
                                               email: @user.email } }
     assert_redirected_to root_url
+  end
+
+  test "should not allow the admin attribute to be edited via the web" do
+    log_in_as(@user2)
+    assert_not @user2.admin?
+    patch user_path(@user2), params: {
+                              user: { password:              "password",
+                                      password_confirmation: "password",
+                                      admin: true } }
+    assert_not @user2.reload.admin?
   end
   
 end
