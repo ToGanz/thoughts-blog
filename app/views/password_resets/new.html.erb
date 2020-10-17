@@ -1,7 +1,7 @@
 <% provide(:title, "Forgot password") %>
 <h1>Forgot password</h1>
 
-<div class="form pw-reset-form">
+<div class="form forgot-pw-form">
   <%= form_with(url: password_resets_path, scope: :password_reset,
                 local: true) do |f| %>
 
