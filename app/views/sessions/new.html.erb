@@ -1,6 +1,7 @@
 <%= form_with(scope: :session, url: login_path, local: true) do |f| %> 
   <%= f.email_field :email, :placeholder => "Email" %> 
   <%= f.password_field :password, :placeholder => "Password" %> 
+  <%= link_to "(forgot password)", new_password_reset_path %>
   <%= f.submit "Log in" %>
 <% end %>
 
