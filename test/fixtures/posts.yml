@@ -19,6 +19,7 @@ banana:
   user: tobi
 
 most_recent:
+  title: "Now"
   content: "Writing a short test"
   created_at: <%= Time.zone.now %>
   user: tobi
