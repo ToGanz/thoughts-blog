@@ -7,8 +7,7 @@ class PostTest < ActiveSupport::TestCase
       email: "user1@test.com",
       password: "password", password_confirmation: "password")
 
-    # This code is not idiomatically correct.
-    @post = Post.new(title: "Test post", content: "Lorem ipsum", user_id: @user.id)
+    @post = @user.posts.build(title: "Test post", content: "Lorem ipsum")
   end
 
   test "should be valid" do
@@ -19,5 +18,16 @@ class PostTest < ActiveSupport::TestCase
     @post.user_id = nil
     assert_not @post.valid?
   end
+
+  test "title should be present" do
+    @post.title = "   "
+    assert_not @post.valid?
+  end
+
+  test "content should be present" do
+    @post.content = "   "
+    assert_not @post.valid?
+  end
+
 
 end
