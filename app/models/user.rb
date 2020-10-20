@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   attr_accessor :reset_token
 
-  has_many :posts
+  has_many :posts, dependent: :destroy
   
   has_secure_password
 
