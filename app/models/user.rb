@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   attr_accessor :reset_token
 
+  has_many :posts
+  
   has_secure_password
 
   before_save   :downcase_email
