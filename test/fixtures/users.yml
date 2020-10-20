@@ -5,7 +5,24 @@
 # below each fixture, per the syntax in the comments below
 #
 
-# column: value
-#
-two: {}
-# column: value
+tobi:
+  name: tobi
+  email: tobi@test.com
+  password_digest: <%= User.digest('password') %>
+  admin: true
+
+user1:
+  name: User1
+  email: user1@test.com,
+  password_digest: <%= User.digest('password') %>
+  admin: true
+
+user2:
+  name: User2
+  email: user2@test.com,
+  password_digest: <%= User.digest('password') %>
+
+user3:
+  name: User3
+  email: user3@test.com,
+  password_digest: <%= User.digest('password') %>
