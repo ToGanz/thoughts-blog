@@ -60,3 +60,4 @@ end
 
 gem 'rails-controller-testing'
 gem 'will_paginate'
+gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
