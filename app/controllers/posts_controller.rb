@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :require_user, except: [:show, :index]
+  before_action :require_correct_user, only: :destroy
 
   def show
     @post = Post.find(params[:id])
@@ -38,12 +39,25 @@ class PostsController < ApplicationController
   end
 
   def destroy
+    @post = Post.find(params[:id])
+    @post.destroy
+    flash[:success] = "Post deleted"
+    if request.referrer.nil? || request.referrer == post_url(@post)
+      redirect_to root_url 
+    else
+      redirect_to request.referrer
+    end
   end
 
   private
 
   def post_params
     params.require(:post).permit(:title, :content)
+  end
+
+  def require_correct_user
+    @post = current_user.posts.find(params[:id])
+    redirect_to(root_path) if @post.nil?
   end
   
 end
