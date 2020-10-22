@@ -29,6 +29,7 @@ class PostsCreationTest < ActionDispatch::IntegrationTest
     assert_no_difference 'Post.count' do
       post posts_path, params: { post: { title: " ", content: "te"} }
     end
+    assert_template 'posts/new'
     assert_match 'errors', response.body
     assert_select 'div.alert'
   end
