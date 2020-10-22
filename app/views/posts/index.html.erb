@@ -1,7 +1,2 @@
-<% if @posts.any? %>
-  <h3>Posts (<%= @posts.count %>)</h3>
-  <ol class="posts">
-    <%= render @posts %>
-  </ol>
-  <%= will_paginate @posts %>
-<% end %>
+
+<%= render 'shared/post_feed'%>
