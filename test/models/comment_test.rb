@@ -30,4 +30,11 @@ class CommentTest < ActiveSupport::TestCase
   test "order should be most recent last" do
     assert_equal comments(:most_recent), Comment.last
   end
+
+  test "comment on post should increase after save" do
+    assert_equal @post.total_comments_count, 0
+    @comment.save!
+    @post.reload
+    assert_equal @post.total_comments_count, 1
+  end
 end
