@@ -31,10 +31,20 @@ class CommentTest < ActiveSupport::TestCase
     assert_equal comments(:most_recent), Comment.last
   end
 
-  test "comment on post should increase after save" do
-    assert_equal @post.total_comments_count, 0
+  test "commentcount on post should increase after save" do
+    assert_difference '@post.total_comments_count', 1 do
+      @comment.save!
+      @post.reload
+    end
+  end
+
+  test "commentcount on post should decrease after delete" do
     @comment.save!
     @post.reload
-    assert_equal @post.total_comments_count, 1
+    assert_difference '@post.total_comments_count', -1 do
+      @comment.destroy
+      @post.reload
+    end
   end
+
 end
