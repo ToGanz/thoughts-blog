@@ -26,4 +26,8 @@ class CommentTest < ActiveSupport::TestCase
     @comment.content = "         "
     assert_not @comment.valid?
   end
+
+  test "order should be most recent last" do
+    assert_equal comments(:most_recent), Comment.last
+  end
 end
