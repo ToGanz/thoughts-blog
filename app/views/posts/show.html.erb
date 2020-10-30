@@ -12,4 +12,8 @@
       <%= link_to "delete", @post, method: :delete,
                               data: { confirm: "You sure?" } %>
   <% end %>
+
+  <% if logged_in? %> 
+    <%= render 'comments/form' %>
+  <% end %>
 </div>
