@@ -4,13 +4,13 @@ most_recent:
   user: user1
   post: superman
 
-most_recent:
+comment2:
   content: "Writing a short test"
   created_at: <%= 2.hours.ago %>
   user: user2
   post: superman
 
-most_recent:
+comment3:
   content: "Writing a short test2"
   created_at: <%= 2.days.ago %>
   user: tobi
