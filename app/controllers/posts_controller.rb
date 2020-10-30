@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   before_action :require_user, except: [:show, :index]
   before_action :require_correct_user, only: :destroy
+  before_action :require_admin, only: [:new, :create]
 
   def show
     @post = Post.find(params[:id])

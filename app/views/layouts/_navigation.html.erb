@@ -1,6 +1,11 @@
+<%= link_to "Home", root_path %>
+
 <% if logged_in? %> 
   <ul> 
     <li><%= link_to "Users", users_path %></li>
+    <% if current_user.admin? %>
+      <li><%= link_to "Create Post", new_post_path %></li>
+    <%end %>
     <li><%= current_user.email %></li> 
     <li><%= link_to "Profile", current_user %></li>
     <li><%= link_to "Settings", edit_user_path(current_user) %></li>
