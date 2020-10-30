@@ -16,6 +16,14 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to login_url
   end
 
+  test "should redirect destroy when not logged in" do
+    assert_no_difference 'Comment.count' do
+      delete comment_path(@comment)
+    end
+    assert_not flash.empty?
+    assert_redirected_to login_url
+  end
+
   test "should redirect destroy when not admin" do
     log_in_as(@non_admin)
     assert_no_difference 'Comment.count' do
