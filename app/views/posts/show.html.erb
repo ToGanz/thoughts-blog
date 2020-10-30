@@ -14,6 +14,7 @@
   <% end %>
   <span class="comments-count"><%= pluralize(@post.total_comments_count, 'comment') %></span>
   <%= render @comments %>
+  <%= will_paginate @comments %>
   <% if logged_in? %> 
     <%= render 'comments/form' %>
   <% end %>
