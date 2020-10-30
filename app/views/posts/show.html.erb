@@ -12,7 +12,7 @@
       <%= link_to "delete", @post, method: :delete,
                               data: { confirm: "You sure?" } %>
   <% end %>
-
+  <span class="comments-count"><%= pluralize(@post.total_comments_count, 'comment') %></span>
   <%= render @comments %>
   <% if logged_in? %> 
     <%= render 'comments/form' %>
