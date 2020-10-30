@@ -26,3 +26,10 @@ user3:
   name: User3
   email: user3@test.com,
   password_digest: <%= User.digest('password') %>
+
+<% 10.times do |n| %>
+person_<%= n %>:
+  name: person_<%= n %> %>
+  email: person_<%= n %>@test.com %>
+  password_digest: <%= User.digest('password') %>
+<% end %>
