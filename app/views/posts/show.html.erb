@@ -13,6 +13,7 @@
                               data: { confirm: "You sure?" } %>
   <% end %>
 
+  <%= render @comments %>
   <% if logged_in? %> 
     <%= render 'comments/form' %>
   <% end %>
