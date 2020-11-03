@@ -1,19 +1,40 @@
-<%= link_to "Home", root_path %>
 
-<% if logged_in? %> 
-  <ul> 
-    <li><%= link_to "Users", users_path %></li>
-    <% if current_user.admin? %>
-      <li><%= link_to "Create Post", new_post_path %></li>
-    <%end %>
-    <li><%= current_user.email %></li> 
-    <li><%= link_to "Profile", current_user %></li>
-    <li><%= link_to "Settings", edit_user_path(current_user) %></li>
-    <li><%= link_to "Log out", logout_path, method: "delete" %></li> 
-  </ul> 
-<% else %> 
-  <ul> 
-    <li><%= link_to "Login", 'login' %></a></li> 
-    <li><%= link_to "Signup", 'signup' %></a></li> 
-  </ul> 
-<% end %> 
+<nav class="navbar">
+  <ul class="nav-list">
+    <li class="nav-item">
+      <%= link_to "Home", root_path %>
+    </li>
+    <li></li>
+    <li></li>
+    <% if logged_in? %> 
+      <li class="nav-item">
+        <%= link_to "Users", users_path %>
+      </li>
+      <% if current_user.admin? %>
+        <li class="nav-item">
+          <%= link_to "Create Post", new_post_path %>
+        </li>
+      <%end %>
+      <li class="nav-item">
+        <div class="dropdown">
+          <a class="dropbtn" id="dropbtn">Profile</a>
+          <div id="myDropdown" class="dropdown-content">
+            <%= link_to current_user.name, current_user %>
+            <%= link_to "View Profile", current_user %>
+            <%= link_to "Settings", edit_user_path(current_user) %>
+          </div>
+        </div>
+      </li>
+      <li class="nav-item">
+        <%= link_to "Log out", logout_path, method: "delete" %>
+      </li> 
+    <% else %> 
+      <li class="nav-item">
+        <%= link_to "Login", 'login' %></a>
+      </li> 
+      <li class="nav-item">
+        <%= link_to "Signup", 'signup' %></a>
+      </li> 
+    <% end %> 
+  </ul>
+</nav>

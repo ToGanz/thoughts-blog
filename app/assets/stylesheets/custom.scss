@@ -1,0 +1,12 @@
+
+@import "./variables";
+@import "./navigation";
+
+body {
+ font-family: 'Muli', sans-serif !important;
+  background-image: linear-gradient(to right, $darkBlueColor, $blueColor);
+}
+
+.btn {
+  @include btn;
+}
