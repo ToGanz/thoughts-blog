@@ -1,18 +1,19 @@
 @import "./variables";
 
-body a {
-  text-decoration: none;
-  color: #fff;
-}
 
 .navbar {
   width: 100%;
   background-color: $darkBlueColor;
+  a {
+    color: #fff;
+  }
+  -webkit-box-shadow: 2.5px 2.5px 7.5px 2.5px #000000; 
+  box-shadow: 2.5px 2.5px 7.5px 2.5px #000000;
 }
 
 .nav-list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   justify-items: center;
   align-items: center;
   a {
@@ -21,6 +22,11 @@ body a {
     display: grid;
     place-items: center;
   }
+}
+
+.nav-title {
+  font-weight: 700;
+  font-size: 20px;
 }
 
 .nav-item {

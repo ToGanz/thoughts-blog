@@ -3,10 +3,119 @@
 @import "./navigation";
 
 body {
- font-family: 'Muli', sans-serif !important;
+  font-family: 'Muli', sans-serif !important;
   background-image: linear-gradient(to right, $darkBlueColor, $blueColor);
+  a {
+    text-decoration: none;
+  }
 }
 
 .btn {
   @include btn;
 }
+
+// layout
+
+.container {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  display: grid;
+  grid-template-columns: minmax(10px, 1fr) 700px minmax(10px, 1fr);
+  a {
+    color: black;
+  }
+  a:hover {
+    color: $blueColor;
+  }
+}
+
+.box {
+  margin-top: 20px;
+  background-color: white;
+  color: black;
+  border: 1px groove rgba(28,110,164,0.35);
+  border-radius: 20px 20px 20px 20px;
+  -webkit-box-shadow: 2.5px 2.5px 7.5px 2.5px #000000; 
+  box-shadow: 2.5px 2.5px 7.5px 2.5px #000000;
+  padding: 20px;
+
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 10px;
+
+  .delete-link a {
+    color: red;
+  }
+}
+
+// header
+
+.header {
+  display: grid;
+}
+
+.header-image {
+  top: 120px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+
+.headline {
+  top: 120px;
+  left: 30%;
+  width: 300px;
+  color: white;
+  font-size: 50px;
+}
+
+.links a {
+  @include btn;
+  padding: 10px;
+}
+
+// posts
+
+.title {
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.user a {
+  color: black;
+}
+
+.timestamp {
+  font-size: 12px;
+  font-style: italic;
+  a {
+    color: black;
+  }
+}
+
+.comment {
+  margin: 10px;
+}
+
+.content p {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+// form
+
+form {
+  display: grid;
+  grid-template-columns: 1fr;
+  width: 50%;
+}
+
+input, textarea {
+  padding: 10px;
+  margin:10px 0;
+  box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+  border-radius:10px;
+}
+
+
+
+

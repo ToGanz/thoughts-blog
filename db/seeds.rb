@@ -25,6 +25,6 @@ end
 users = User.order(:created_at).take(6)
 50.times do
   title = Faker::Lorem.sentence(word_count: 1)
-  content = Faker::Lorem.sentence(word_count: 5)
+  content = Faker::Lorem.sentence(word_count: 300)
   users.each { |user| user.posts.create!(title: title, content: content) }
 end

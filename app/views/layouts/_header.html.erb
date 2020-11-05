@@ -1,0 +1,12 @@
+<div class="header">
+  <p class="headline">
+      Share your Thoughts!
+    </p>
+  <img class="header-image" src="<%= image_path('Workathome.png') %>" alt="Person at a computer">
+  <% if !logged_in? %> 
+    <div class="links">
+      <%= link_to  "Sign up", signup_path %>
+      <%= link_to  "Log in", login_path %>
+    </div>
+  <% end %>
+</div>
