@@ -22,11 +22,11 @@
       </aside>
       <main>
         <% flash.each do |message_type, message| %>
-          <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
+          <%= content_tag(:div, message, class: "box alert alert-#{message_type}") %>
         <% end %>
         
         <%= yield %>
-        
+
         <%= debug(params) if Rails.env.development? %>
       </main>
       <aside>

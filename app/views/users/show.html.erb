@@ -1,11 +1,13 @@
 <% provide(:title, @user.name) %>
-<h2><%= @user.name %></h2>
-<%= @user.email %>
+<div class="box">
+  <h2>Name: <%= @user.name %></h2>
+  Email: <%= @user.email %>
 
-<% if @user.posts.any? %>
-  <h3>Posts (<%= @user.posts.count %>)</h3>
-  <ol class="posts">
-    <%= render @posts %>
-  </ol>
-  <%= will_paginate @posts %>
-<% end %>
+  <% if @user.posts.any? %>
+    <h3>Posts (<%= @user.posts.count %>)</h3>
+    <ol class="posts">
+      <%= render @posts %>
+    </ol>
+    <%= will_paginate @posts %>
+  <% end %>
+</div>

@@ -1,5 +1,7 @@
 <% if @posts.any? %>
-  <h3>Posts (<%= @posts.count %>)</h3>
+  <div class="box">
+    <h3>Posts (<%= @posts.count %>)</h3>
+  </div>
   <ol class="posts">
     <%= render @posts %>
   </ol>

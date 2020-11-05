@@ -1,4 +1,4 @@
-<li id="post-<%= post.id %>">
+<li class="box" id="post-<%= post.id %>">
   <span class="user"><%= link_to post.user.name, post.user %></span>
   <span class="title"><%= link_to post.title, post_path(post) %></span>
   <span class="image"><%= image_tag post.display_image if post.image.attached? %></span>

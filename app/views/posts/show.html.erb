@@ -9,6 +9,9 @@
 
 
   <% if current_user?(@post.user) %>
+    <span class="edit-link">
+      <%= link_to "edit", edit_post_path(@post) %>
+    </span>
     <span class="delete-link">
       <%= link_to "delete", @post, method: :delete,
                               data: { confirm: "You sure?" } %>
