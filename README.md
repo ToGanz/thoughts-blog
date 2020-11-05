@@ -1,24 +1,11 @@
-# README
+## Thoughts Blog
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A simple blog page written in Ruby on Rails
 
-Things you may want to cover:
+I made this to really understand authentication and authentication.
+I wanted to go back and make my own authentication system without the devise gem. This way I can understand devise better when i use it in the future.
 
-* Ruby version
+Another point I practiced with this app was testing. I used minitest and tried to achieve a good test coverage.
+The main benefit I saw from testing is, that you can come back to the code a few days later and continue coding without breaking everything.
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Check the site out live: https://thoughts-of-coders.herokuapp.com/
