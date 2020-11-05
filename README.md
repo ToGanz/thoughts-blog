@@ -2,7 +2,7 @@
 
 A simple blog page written in Ruby on Rails
 
-I made this to really understand authentication and authorization.
+I made this as a refresher on authentication and authorization.
 I wanted to go back and make my own authentication system without the devise gem. This way I can understand devise better when i use it in the future.
 
 Another point I practiced with this app was testing. I used minitest and tried to achieve a good test coverage.
