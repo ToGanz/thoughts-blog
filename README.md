@@ -23,3 +23,7 @@ Notes on the Authorization:
 * Only Admins can delete users
 * Every logged in user can comment
 * Only Admins can delete comments
+
+* If you want to test the app as an admin just look at:
+  test@test.com
+  password
