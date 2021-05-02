@@ -12,6 +12,11 @@ The frontend is mostly done with css-grid.
 
 Check the site out live: https://thoughts-of-coders.herokuapp.com/
 
+
+![image](https://user-images.githubusercontent.com/49613341/116801307-e0878d00-ab08-11eb-86c4-bcc2d4d76ee1.png)
+
+
+
 Notes on the Authorization:
 * Everyone can read posts
 * Only Admins can create/edit/destroy posts
