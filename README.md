@@ -28,6 +28,10 @@ Notes on the Authorization:
 * If you want to test the app as an admin just look at:
   test@test.com
   password
+  
+
+To remember how I implemented the authentication i made a step-by-step guide of the implementation.
+In the future I will use devise because it is easier to setup and has more features. 
 
 ## Implementaion of the Authentication and Authorization
 * [Authentication](#implementaion-of-the-authentication)
@@ -42,7 +46,7 @@ Notes on the Authorization:
   * [Add require method](#add-require-method)   
 
 
-## Implementation of the authentication
+## Implementation of the Authentication
 
 ### Sign up
 
