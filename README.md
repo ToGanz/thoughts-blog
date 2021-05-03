@@ -29,8 +29,8 @@ Notes on the Authorization:
   test@test.com
   password
 
-[Authentication](implementaion-of-the-authentication)
-[Sign up](sign-up)
+[Authentication](##-implementaion-of-the-authentication)
+[Sign up](###-sign-up)
 
 ## Implementation of the authentication
 
