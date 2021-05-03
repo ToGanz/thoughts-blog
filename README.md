@@ -31,7 +31,7 @@ Notes on the Authorization:
 
 ## Implementaion of the Authentication and Authorization
 
-To remember how I implemented the authentication i made a step-by-step guide of the implementation.
+To remember how I implemented the authentication I made a step-by-step guide of the implementation.
 In the future I will use devise because it is easier to setup and has more features.
 
 * [Authentication](#implementaion-of-the-authentication)
