@@ -53,6 +53,7 @@ Notes on the Authorization:
 
   3. In the Gemfile, uncomment the **bcrypt** gem.
     In order to save passwords securely, has_secure_password uses an algorithm called bcrypt.
+    
     ```ruby
     # Use ActiveModel has_secure_password
     gem 'bcrypt', '~> 3.1.7'
@@ -86,7 +87,7 @@ Notes on the Authorization:
 
 
   6. Run a **migration** to update the database.
-
+    
     ```bash
     rails db:migrate
     ```
@@ -114,20 +115,17 @@ Notes on the Authorization:
 
 ### Create a controller
   1. Generate the **Users controller.**
-
     ```bash
     rails generate controller Users
     ```
 
   2. In the routes file, add these **routes**:
-
     ```ruby
     get 'signup'  => 'users#new' 
     resources :users 
     ```
 
-  3. In the Users controller add the **new** action.
-
+  3. In the Users controller add the **new** action
     ```ruby
     def new
       @user = User.new
@@ -135,7 +133,6 @@ Notes on the Authorization:
     ```
 
   4. Set up the form in **app/views/users/new.html.erb.**
-
     ```html
     <%= form_with(model: @user, local: true) do |f| %>
 
@@ -158,7 +155,6 @@ Notes on the Authorization:
   5. Take in data submitted through the signup form and save it to the database.
 
     In the Users controller, add a private method **user_params**.
-
     ```ruby
     private
 
@@ -170,7 +166,6 @@ Notes on the Authorization:
     ```
 
     Add the **create** action.
-
     ```ruby
     def create 
       @user = User.new(user_params) 
@@ -188,7 +183,6 @@ Notes on the Authorization:
         A session begins when a users logs in, and ends when a user logs out.
 
         How is a new session created? Sessions are stored as key/value pairs. In the `create` action, the line
-
         ```ruby
         session[:user_id] = @user.id 
 
