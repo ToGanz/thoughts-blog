@@ -36,9 +36,7 @@ Notes on the Authorization:
 ### Create a model
 
   1. Generate the **User model**
-
-   
-    rails generate model User
+  rails generate model User
 
   2. In *app/models/user.rb*, add a method named **has_secure_password**. 
     (adds functionality to save passwords securely)
