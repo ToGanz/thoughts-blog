@@ -36,23 +36,23 @@ Notes on the Authorization:
 ### Create a model
 
   1. Generate the **User model**
+  ```
   rails generate model User
-
+  ```
   2. In *app/models/user.rb*, add a method named **has_secure_password**. 
-    (adds functionality to save passwords securely)
+  (adds functionality to save passwords securely)
+  
+  ```ruby
+  class User < ActiveRecord::Base 
 
-    ```ruby
-    class User < ActiveRecord::Base 
+    has_secure_password 
 
-      has_secure_password 
-
-    end
-    ```
+  end
+  ```
 
 
   3. In the Gemfile, uncomment the **bcrypt** gem.
     In order to save passwords securely, has_secure_password uses an algorithm called bcrypt.
-
     ```ruby
     # Use ActiveModel has_secure_password
     gem 'bcrypt', '~> 3.1.7'
