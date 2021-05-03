@@ -37,9 +37,9 @@ Notes on the Authorization:
 
   1. Generate the **User model**
 
-    ```bash
+   
     rails generate model User
-    ```
+  
 
 
 
