@@ -54,10 +54,10 @@ Notes on the Authorization:
   3. In the Gemfile, uncomment the **bcrypt** gem.
     In order to save passwords securely, has_secure_password uses an algorithm called bcrypt.
     
-    ```ruby
-    # Use ActiveModel has_secure_password
-    gem 'bcrypt', '~> 3.1.7'
-    ```
+  ```ruby
+  # Use ActiveModel has_secure_password
+  gem 'bcrypt', '~> 3.1.7'
+  ```
 
 
   4. **Install** the gems
