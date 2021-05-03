@@ -12,7 +12,7 @@ The main benefit I saw from testing is, that you can come back to the code a few
 The frontend is not really fleshed out and mostly done with css-grid.
 
 ### Implementation of the authentication
-* To save password securely i used the bcrypt gem. 
+* To save the password securely i used the bcrypt gem. 
 
 When a user submits their password, it’s not a good idea to store that password as is in the database; if an attacker somehow gets into the database, they would be able to see all of the users’ passwords.
 One way to defend against this is to store passwords as encrypted strings in the database. 
@@ -44,12 +44,10 @@ end
 The authenticate method is used to check if the provided password matches the stored password_digest
 
 
-
-Check the site out live: [https://thoughts-of-coders.herokuapp.com/]
-
-
 ![image](https://user-images.githubusercontent.com/49613341/116801307-e0878d00-ab08-11eb-86c4-bcc2d4d76ee1.png)
 
+
+Check the site out live: [https://thoughts-of-coders.herokuapp.com/]
 
 
 Notes on the Authorization:
@@ -62,3 +60,24 @@ Notes on the Authorization:
 * If you want to test the app as an admin just look at:
   test@test.com
   password
+
+### Implementation of the authentication
+
+#### Sign up
+
+* Create a model
+
+  1. Generate the **User model**
+  ```bash
+  rails generate model User
+  ```
+  2. In *app/models/user.rb*, add a method named **has_secure_password**. 
+  (adds functionality to save passwords securely)
+  ```ruby
+  class User < ActiveRecord::Base 
+
+    has_secure_password 
+
+  end
+  ```
+
