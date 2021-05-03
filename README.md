@@ -33,7 +33,7 @@ Notes on the Authorization:
 
 ### Sign up
 
-#### Create a model
+### Create a model
 
   1. Generate the **User model**
 
@@ -56,7 +56,7 @@ Notes on the Authorization:
 
   3. In the Gemfile, uncomment the **bcrypt** gem.
     In order to save passwords securely, has_secure_password uses an algorithm called bcrypt.
-    
+
     ```ruby
     # Use ActiveModel has_secure_password
     gem 'bcrypt', '~> 3.1.7'
@@ -116,7 +116,7 @@ Notes on the Authorization:
     ```
 
 
-#### Create a controller
+### Create a controller
   1. Generate the **Users controller.**
 
     ```bash
@@ -159,7 +159,7 @@ Notes on the Authorization:
     <% end %>
     ```
 
-5. Take in data submitted through the signup form and save it to the database.
+  5. Take in data submitted through the signup form and save it to the database.
 
     In the Users controller, add a private method **user_params**.
 
