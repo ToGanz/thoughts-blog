@@ -11,38 +11,6 @@ The main benefit I saw from testing is, that you can come back to the code a few
 
 The frontend is not really fleshed out and mostly done with css-grid.
 
-### Implementation of the authentication
-* To save the password securely i used the bcrypt gem. 
-
-When a user submits their password, it’s not a good idea to store that password as is in the database; if an attacker somehow gets into the database, they would be able to see all of the users’ passwords.
-One way to defend against this is to store passwords as encrypted strings in the database. 
-
-
-To do this I added the method "has_secure_password" to the User Model.
-```ruby
-class User < ActiveRecord::Base 
-
-  has_secure_password 
-
-end
-```
-This method uses the bcrypt algorithm to securely hash a user’s password, which then gets saved in a password_digest column.
-Then when a user logs in again, "has_secure_password" will collect the password that was submitted, hash it with bcrypt, and check if it matches the hash in the database.
-
-The create method for logging in looks like this:
-```ruby
-def create
-  @user = User.find_by_email(params[:session][:email].downcase)
-  if @user && @user.authenticate(params[:session][:password])
-    session[:user_id] = @user.id
-    redirect_to '/'
-  else
-    render 'new'
-  end 
-end
-```
-The authenticate method is used to check if the provided password matches the stored password_digest
-
 
 ![image](https://user-images.githubusercontent.com/49613341/116801307-e0878d00-ab08-11eb-86c4-bcc2d4d76ee1.png)
 
@@ -68,16 +36,71 @@ Notes on the Authorization:
 * Create a model
 
   1. Generate the **User model**
-  ```bash
-  rails generate model User
-  ```
+    ```bash
+    rails generate model User
+    ```
+
   2. In *app/models/user.rb*, add a method named **has_secure_password**. 
-  (adds functionality to save passwords securely)
-  ```ruby
-  class User < ActiveRecord::Base 
+    (adds functionality to save passwords securely)
+    ```ruby
+    class User < ActiveRecord::Base 
 
-    has_secure_password 
+      has_secure_password 
 
-  end
-  ```
+    end
+    ```
 
+  3. In the Gemfile, uncomment the **bcrypt** gem.
+    In order to save passwords securely, has_secure_password uses an algorithm called bcrypt.
+    ```ruby
+    # Use ActiveModel has_secure_password
+    gem 'bcrypt', '~> 3.1.7'
+    ```
+
+  4. **Install** the gems
+
+  5. **Add columns**  to the migration file in db/migrate/ for the users table.
+    For example:
+    ```ruby
+    class CreateUsers < ActiveRecord::Migration
+      def change
+        create_table :users do |t|
+          t.string :name
+          t.string :email
+          t.string :password_digest
+          t.timestamps
+        end
+      end
+    end
+    ```
+    **Encryption**
+    What’s the `password_digest` column for? When a user submits their password, it’s not a good idea to store that password as is in the database; if an attacker somehow gets into your database, they would be able to see all your users’ passwords.
+
+    One way to defend against this is to store passwords as encrypted strings in the database. This is what the `has_secure_password` method helps with - it uses the bcrypt algorithm to securely hash a user’s password, which then gets saved in the `password_digest` column.
+
+    Then when a user logs in again,`has_secure_password` will collect the password that was submitted, hash it with bcrypt, and check if it matches the hash in the database.
+
+  6. Run a **migration** to update the database.
+
+    ```bash
+    rails db:migrate
+    ```
+
+  7. add **validations** to the model
+    For example:
+    ```ruby
+    before_save   :downcase_email
+
+    validates :name, presence: true, length: { minimum: 2, maximum: 50 }
+    VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
+    validates :email, presence: true, length: { maximum: 255 },
+                      format: { with: VALID_EMAIL_REGEX },
+                      uniqueness: { case_sensitive: false }
+    validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
+
+    private
+
+    def downcase_email
+      self.email.downcase!
+    end
+    ```
