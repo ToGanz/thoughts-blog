@@ -29,8 +29,10 @@ Notes on the Authorization:
   test@test.com
   password
 
-[Authentication](#implementaion-of-the-authentication)
-[Sign up](#sign-up)
+* [Authentication](#implementaion-of-the-authentication)
+  * [Sign up](#sign-up)
+    * [Create a model](#create-a-model)
+    * [Create a controller](#create-a-controller)
 
 ## Implementation of the authentication
 
