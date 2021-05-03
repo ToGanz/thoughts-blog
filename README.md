@@ -29,10 +29,18 @@ Notes on the Authorization:
   test@test.com
   password
 
+## Implementaion of the Authentication and Authorization
 * [Authentication](#implementaion-of-the-authentication)
   * [Sign up](#sign-up)
     * [Create a model](#create-a-model)
     * [Create a controller](#create-a-controller)
+  * [Login](#login)
+  * [Logout](#logout)
+  * [Checking for logged in users](#checking-for-logged-in-users)
+* [Authorization](#implementation-of-the-authorization)
+  * [Add a user role](#add-a-user-role)   
+  * [Add require method](#add-require-method)   
+
 
 ## Implementation of the authentication
 
@@ -195,9 +203,209 @@ Notes on the Authorization:
 
     creates a new session by taking the value `@user.id` and assigning it to the key `:user_id`.
 
+### Login
+1. Generate a **Sessions** controller.
 
+  ```bash
+  rails generate controller Sessions
+  ```
+
+2. Add the login **route**.
+
+  ```ruby
+  get 'login' => 'sessions#new'
+  ```
+
+3. In the Sessions controller add the **new** action.
+
+  ```ruby
+  def new
+  end
+  ```
+
+
+4. In *app/views/sessions/new.html.erb*, create a **login form.**
+
+  ```html
+  <%= form_with(scope: :session, url: login_path, local: true) do |f| %> 
+    <%= f.email_field :email, :placeholder => "Email" %> 
+    <%= f.password_field :password, :placeholder => "Password" %> 
+    <%= f.submit "Log in" %>
+  <% end %>
+  ```
+
+5. Set the **route** for the post of the form.
+
+  ```ruby
+  post 'login' => 'sessions#create'
+  ```
   
+6. Add the **create** action.
+
+  ```ruby
+  def create
+    @user = User.find_by_email(params[:session][:email].downcase)
+    if @user && @user.authenticate(params[:session][:password])
+      session[:user_id] = @user.id
+      redirect_to '/'
+    else
+      render 'new'
+    end 
+  end
+  ```
 
 
+### Logout
 
+1. Set the **delete** route.
+
+  ```ruby
+  delete 'logout' => 'sessions#destroy'
+  ```
+
+2. Add the **destroy** action.
+
+  ```ruby
+  def destroy 
+    session[:user_id] = nil 
+    redirect_to '/' 
+  end
+  ```
+
+
+### Checking for logged in users
+
+1. In *app/controllers/application_controller.rb*, add a method named **current_user.**
+
+  ```ruby
+  helper_method :current_user 
+
+  def current_user 
+    @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id] 
+  end
+  ```
+
+  - Explanation
+      1. The `current_user` method determines whether a user is logged in or logged out. It does this by checking whether there’s a user in the database with a given session id. If there is, this means the user is logged in and `@current_user` will store that user; otherwise the user is logged out and `@current_user` will be `nil`.
+      2. The line `helper_method :current_user` makes `current_user` method available in the views. By default, all methods defined in Application Controller are already available in the controllers.
+
+  2. In *app/controllers/application_controller.rb*, add a method named **require_user.**
+
+  ```ruby
+  def require_user 
+    redirect_to '/login' unless current_user 
+  end
+  ```
+
+  - Explanation
+
+      The `require_user`  method uses the `current_user`  method to redirect logged out users to the login page.
+
+3. To prevent logged out users from accessing certain resources, you can use a **before action** with require_user in the corresponding controller.
+
+  ```ruby
+  before_action :require_user, only: [:edit, :update, :destroy]
+  ```
+
+
+4. Of course, requiring users to log in isn’t quite enough; users should only be allowed to edit their own information.
+  1. Add  `require_correct_user` method to *app/controller/users_controller.rb* 
+
+  ```ruby
+  def require_correct_user
+    @user = User.find(params[:id])
+    redirect_to(root_url) unless @user && @user == current_user
+  end
+  ```
+
+  2. add before action to the controller
+
+  ```ruby
+  before_action :require_correct_user, only: [:edit, :update, :destroy]
+  ```
+
+5. In *app/controllers/application_controller.rb*, add a method named **logged_in?.**
+
+  ```ruby
+  helper_method :logged_in? 
+
+  def logged_in?
+    !!current_user
+  end
+  ```
+
+  - Explanation
+
+      A boolean method for use in the views
+
+
+6. You can use `logged_in?` in **application layout** to update the nav items depending on whether a user is logged in or out. In **app/views/layouts/application.html.erb.**
+
+  ```html
+  <% if logged_in? %> 
+    <ul> 
+      <li><%= current_user.email %></li> 
+      <li><%= link_to "Log out", logout_path, method: "delete" %></li> 
+    </ul> 
+  <% else %> 
+    <ul> 
+      <li><%= link_to "Login", 'login' %></a></li> 
+      <li><%= link_to "Signup", 'signup' %></a></li> 
+    </ul> 
+  <% end %> 
+
+  ```
    
+
+## Implementation of Authorization
+
+### Add a user role
+1. Generate a migration
+
+  ```bash
+    rails generate migration AddRoleToUsers role:string
+  ```
+
+2. In the migration file, add a string column called **role** to the users table.
+
+  ```ruby
+  class AddRoleToUsers < ActiveRecord::Migration
+    def change
+      add_column :users, :role, :string
+    end
+  end
+  ```
+
+3. Add a **method** to the User model that will help use the role column in our application.
+
+  ```ruby
+  def admin? 
+    self.role == 'admin' 
+  end
+  ```
+
+### Add require method
+
+1. In the Application controller (app/controllers/application_controller.rb), add another method named **require_admin**
+
+  ```ruby
+  def require_admin 
+    redirect_to '/' unless current_user.admin? 
+  end
+  ```
+
+2. Use the require method as a **before filter** for the actions of the corresponding controller.
+
+  ```ruby
+  before_action :require_admin, only: [:show, :edit]
+  ```
+
+3. Then in the **view** use the admin? method to display an edit link only if a user is an admin.
+
+  ```ruby
+  <% if current_user && current_user.admin? %> 
+    <p class="post-edit"> 
+      <%= link_to "Edit Post", edit_post_path(@post.id) %> 
+    </p> 
+  <% end %>
+  ```
