@@ -92,11 +92,11 @@ Notes on the Authorization:
   ```
 
   ##### Encryption
-  What’s the `password_digest` column for? When a user submits their password, it’s not a good idea to store that password as is in the database; if an attacker somehow gets into your database, they would be able to see all your users’ passwords.
+    What’s the `password_digest` column for? When a user submits their password, it’s not a good idea to store that password as is in the database; if an attacker somehow gets into your database, they would be able to see all your users’ passwords.
 
-  One way to defend against this is to store passwords as encrypted strings in the database. This is what the `has_secure_password` method helps with - it uses the bcrypt algorithm to securely hash a user’s password, which then gets saved in the `password_digest` column.
+    One way to defend against this is to store passwords as encrypted strings in the database. This is what the `has_secure_password` method helps with - it uses the bcrypt algorithm to securely hash a user’s password, which then gets saved in the `password_digest` column.
 
-  Then when a user logs in again,`has_secure_password` will collect the password that was submitted, hash it with bcrypt, and check if it matches the hash in the database.
+    Then when a user logs in again,`has_secure_password` will collect the password that was submitted, hash it with bcrypt, and check if it matches the hash in the database.
 
 
   6. Run a **migration** to update the database.
@@ -106,24 +106,25 @@ Notes on the Authorization:
   ```
 
 
-  7. add **validations** to the model
+  7. add **validations** to the model.
+
   For example:
-  ```ruby
-  before_save   :downcase_email
+    ```ruby
+    before_save   :downcase_email
 
-  validates :name, presence: true, length: { minimum: 2, maximum: 50 }
-  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
-  validates :email, presence: true, length: { maximum: 255 },
-                    format: { with: VALID_EMAIL_REGEX },
-                    uniqueness: { case_sensitive: false }
-  validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
+    validates :name, presence: true, length: { minimum: 2, maximum: 50 }
+    VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
+    validates :email, presence: true, length: { maximum: 255 },
+                      format: { with: VALID_EMAIL_REGEX },
+                      uniqueness: { case_sensitive: false }
+    validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
 
-  private
+    private
 
-  def downcase_email
-    self.email.downcase!
-  end
-  ```
+    def downcase_email
+      self.email.downcase!
+    end
+    ```
 
 
 ### Create a controller
@@ -309,7 +310,7 @@ Notes on the Authorization:
 
 
 4. Of course, requiring users to log in isn’t quite enough; users should only be allowed to edit their own information.
-  1. Add  `require_correct_user` method to *app/controller/users_controller.rb* 
+  * Add  `require_correct_user` method to *app/controller/users_controller.rb* 
 
   ```ruby
   def require_correct_user
@@ -318,7 +319,7 @@ Notes on the Authorization:
   end
   ```
 
-  2. add before action to the controller
+  * add before action to the controller
 
   ```ruby
   before_action :require_correct_user, only: [:edit, :update, :destroy]
@@ -357,7 +358,7 @@ Notes on the Authorization:
   ```
    
 
-## Implementation of Authorization
+## Implementation of the Authorization
 
 ### Add a user role
 1. Generate a migration
