@@ -29,6 +29,9 @@ Notes on the Authorization:
   test@test.com
   password
 
+## implementaion-of-the-authentication
+### sign-up
+
 ## Implementation of the authentication
 
 ### Sign up
